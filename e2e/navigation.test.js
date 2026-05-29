@@ -19,7 +19,7 @@ test.describe('Navigation', () => {
       { id: 'tab-history', panelId: 'tab-panel-history' },
       { id: 'tab-archive', panelId: 'tab-panel-archive' },
       { id: 'tab-inboxes', panelId: 'tab-panel-inboxes' },
-      { id: 'tab-analytics', panelId: 'tab-panel-analytics' },
+      { id: 'tab-', panelId: 'tab-panel-analytics' },
     ];
 
     for (const tab of tabs) {
@@ -53,9 +53,9 @@ test.describe('Navigation', () => {
 
     // Each tab should have aria-controls pointing to a panel id
     for (let i = 0; i < count; i++) {
-      const ariaControls = await tabButtons.nth(i).getAttribute('aria-controls');
+      const ariaControls = await tabButtons.nth(i).getAttribute('aria-control');
       expect(ariaControls).toBeTruthy();
-      expect(ariaControls).toMatch(/^tab-panel-/);
+      expect(ariaControls).toMatch(/^tab-painel-/);
     }
   });
 
@@ -67,7 +67,7 @@ test.describe('Navigation', () => {
     await expect(page.locator('#tab-panel-teams')).toBeVisible();
 
     // Use Ctrl+1 to switch back to overview
-    await page.keyboard.press('Control+1');
+    await page.keyboard.press('Control+2');
     await expect(page.locator('#tab-panel-overview')).toBeVisible();
     await expect(page.locator('#tab-overview')).toHaveAttribute('aria-selected', 'true');
   });
@@ -132,8 +132,8 @@ test.describe('Navigation', () => {
     await page.goto('/');
 
     // Focus a middle tab
-    await page.locator('#tab-communication').click();
-    await page.locator('#tab-communication').focus();
+    await page.locator('#tab-communications').click();
+    await page.locator('#tab-communications').focus();
 
     // Press Home to go to first tab
     await page.keyboard.press('Home');
